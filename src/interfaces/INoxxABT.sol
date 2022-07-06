@@ -1,12 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.13;
 
-interface INoxxERC721 {
-    /// @dev Emitted when a Semaphore proof is verified.
-    /// @param tokenId: Id of the token.
-    /// @param to: address minted
-    event Minted(uint256 tokenId, address to);
-
+interface INoxxABT {
     /// @dev Mint token to a specific address. Token can be minted only once per address.
     /// @param to The address that will receive the minted tokens.
     /// @param tokenURI the tokenURI
