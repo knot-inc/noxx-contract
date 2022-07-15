@@ -9,8 +9,8 @@ import "./ERC4973.sol";
 import "./ERC4973URIStorage.sol";
 import "./interfaces/INoxxABT.sol";
 
-// NoxxABT is Account bound Token
-// - Token can be minted only once per address. Properties are updated through tokenURI
+/// @title NoxxABT is Account bound Token
+/// @dev Token can be minted only once per address. Properties are updated through tokenURI
 contract NoxxABT is
     INoxxABT,
     ERC4973,
@@ -28,7 +28,7 @@ contract NoxxABT is
         _grantRole(MINT_ROLE, msg.sender);
     }
 
-    /// @dev See {INoxxERC721-mint}.
+    /// @dev See {INoxxABT-mint}.
     function mint(address to, string memory _tokenURI)
         external
         whenNotPaused
@@ -42,7 +42,7 @@ contract NoxxABT is
         supplyCounter.increment();
     }
 
-    /// @dev See {INoxxERC721-updateTokenURI}
+    /// @dev See {INoxxABT-updateTokenURI}
     function updateTokenURI(uint256 tokenId, string memory _tokenURI)
         external
         onlyRole(MINT_ROLE)
