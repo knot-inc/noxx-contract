@@ -27,15 +27,20 @@ const genHumanReadableABI = async ({
   ) as string[];
   console.log({ humanReadableFormat });
 
-  const outPath = `out/${contractName}.json`;
+  const outPath = `output/${contractName}.json`;
   try {
     if (fs.existsSync(outPath)) {
       fs.rmSync(outPath);
     }
     fs.appendFileSync(outPath, "[\n");
-    humanReadableFormat.forEach((str) =>
-      fs.appendFileSync(outPath, `"${str}",\n`)
-    );
+    const lastIndex = humanReadableFormat.length - 1;
+    humanReadableFormat.forEach((str, i) => {
+      if (i != lastIndex) {
+        fs.appendFileSync(outPath, `"${str}",\n`);
+      } else {
+        fs.appendFileSync(outPath, `"${str}"\n`);
+      }
+    });
     fs.appendFileSync(outPath, "]\n");
     // file written successfully
   } catch (err) {
