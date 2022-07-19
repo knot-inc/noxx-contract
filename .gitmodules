@@ -4,3 +4,6 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "node-script/zk-tools"]
+	path = node-script/zk-tools
+	url = git@github.com:knot-inc/zk-tools.git
