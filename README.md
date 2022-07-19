@@ -1,7 +1,7 @@
 # Preparation
 
 ```
-yarn install && yarn prepare 
+yarn install && yarn prepare
 ```
 
 # Deploy Contract
