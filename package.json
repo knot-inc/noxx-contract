@@ -1,0 +1,17 @@
+{
+  "name": "noxx-contract",
+  "packageManager": "yarn@3.2.1",
+  "author": "tomo",
+  "license": "MIT",
+  "scripts": {
+    "genHRABI": "ts-node node-script/genHumanReadableABI.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "ethers": "^5.6.9"
+  }
+}

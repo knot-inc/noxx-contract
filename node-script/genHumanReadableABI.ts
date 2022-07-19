@@ -13,7 +13,7 @@ const genHumanReadableABI = async ({
   }
 
   const filePath = path.join(
-    "../out",
+    "./out",
     `${contractName}.sol`,
     `${contractName}.json`
   );
@@ -27,7 +27,7 @@ const genHumanReadableABI = async ({
   ) as string[];
   console.log({ humanReadableFormat });
 
-  const outPath = `output/${contractName}.json`;
+  const outPath = `./abi/${contractName}.json`;
   try {
     if (fs.existsSync(outPath)) {
       fs.rmSync(outPath);
