@@ -20,7 +20,8 @@
     "sourceMap": true,
     "outDir": "./dist/tsc/",
     "types": ["node"],
-    "lib": ["ES6", "DOM"]
+    "lib": ["ES6", "DOM"],
+    "typeRoots": ["node_modules/@types", "node-script/types"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "**/*.test.ts"]
