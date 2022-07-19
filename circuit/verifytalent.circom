@@ -24,7 +24,7 @@ template VerifyTalent(numOfFields) {
 component main { public [ commits ] } = VerifyTalent(1);
 
 /* INPUT = {
-    "commits": "",
-    "values": [""],
-    "nonces": [""]
+    "commits": "20199178195905961735016964499017101892030965751975447305563774106156390243229",
+    "values": ["5363620503418597221"],
+    "nonces": ["825373492"]
 } */
