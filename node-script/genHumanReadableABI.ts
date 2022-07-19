@@ -1,7 +1,7 @@
-import path from "path";
-import fs from "fs";
-import { ethers } from "ethers";
-import { FormatTypes } from "ethers/lib/utils";
+import path from 'path';
+import fs from 'fs';
+import { ethers } from 'ethers';
+import { FormatTypes } from 'ethers/lib/utils';
 
 const genHumanReadableABI = async ({
   contractName,
@@ -9,21 +9,21 @@ const genHumanReadableABI = async ({
   contractName?: string;
 }) => {
   if (!contractName) {
-    return "No contractName set";
+    return 'No contractName set';
   }
 
   const filePath = path.join(
-    "./out",
+    './out',
     `${contractName}.sol`,
-    `${contractName}.json`
+    `${contractName}.json`,
   );
 
-  const abistr = fs.readFileSync(filePath, "utf8");
+  const abistr = fs.readFileSync(filePath, 'utf8');
   const abi = JSON.parse(abistr).abi;
 
   const interfaceOfAbi = new ethers.utils.Interface(abi);
   const humanReadableFormat = interfaceOfAbi.format(
-    FormatTypes.full
+    FormatTypes.full,
   ) as string[];
   console.log({ humanReadableFormat });
 
@@ -32,7 +32,7 @@ const genHumanReadableABI = async ({
     if (fs.existsSync(outPath)) {
       fs.rmSync(outPath);
     }
-    fs.appendFileSync(outPath, "[\n");
+    fs.appendFileSync(outPath, '[\n');
     const lastIndex = humanReadableFormat.length - 1;
     humanReadableFormat.forEach((str, i) => {
       if (i != lastIndex) {
@@ -41,7 +41,7 @@ const genHumanReadableABI = async ({
         fs.appendFileSync(outPath, `"${str}"\n`);
       }
     });
-    fs.appendFileSync(outPath, "]\n");
+    fs.appendFileSync(outPath, ']\n');
     // file written successfully
   } catch (err) {
     console.error(err);
@@ -54,5 +54,5 @@ console.log(`Generate Human readable abi from ${process.argv[2]}`);
 genHumanReadableABI({
   contractName: process.argv[2],
 }).then(() => {
-  console.log("Done");
+  console.log('Done');
 });
