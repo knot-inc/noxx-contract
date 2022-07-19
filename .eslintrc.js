@@ -11,7 +11,7 @@ module.exorts = {
     project: './tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'import'],
+  plugins: ['@typescript-eslint'],
   rules: {
     'no-console': 0,
     semi: 0,
