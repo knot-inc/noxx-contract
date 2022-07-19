@@ -2,6 +2,11 @@
 
 ```
 yarn install && yarn prepare
+
+```
+
+```
+forge build
 ```
 
 # Deploy Contract
