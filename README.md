@@ -1,3 +1,9 @@
+# Preparation
+
+```
+yarn install && yarn prepare
+```
+
 # Deploy Contract
 
 - Make sure .env is set properly
