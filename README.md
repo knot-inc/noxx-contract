@@ -58,3 +58,11 @@ $ yarn snarkjs groth16 prove verifytalent_final.zkey witness.wtns proof.json pub
 $ yarn snarkjs groth16 verify verification_key.json public.json proof.json
 [INFO]  snarkJS: OK!
 ```
+
+# Updating submodule
+
+The command below updates all submodules
+
+```
+git submodule update --recursive --remote --merge
+```
