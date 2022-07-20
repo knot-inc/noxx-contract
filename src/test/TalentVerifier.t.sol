@@ -35,7 +35,7 @@ contract TalentVerifierTest is Test {
     assertEq(result, true);
   }
 
-  function test_cannotVerifyProofWhenInputIs() public {
+  function test_verifyProofFailsWhenInputIsMalicious() public {
     uint256[8] memory maliciousProof = [
       0x013840eb3fa139e182121fbf0d9a3ed55dbf9d76ca28c7523c2ca6206c834dae,
       0x1864e09609640bdad0b1989aff555f6068f4cb82c0e78cb9229647e3c5c55e98,
