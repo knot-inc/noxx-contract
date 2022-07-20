@@ -20,7 +20,12 @@ $ source .env
 $ forge script script/FakeNFT.s.sol:FakeNFTScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast -vvvv
 ```
 
-Contract Address: 0xc9991a0904206da66891156e83170fef61a27c19
+| Contract        | Address                                    |
+| --------------- | ------------------------------------------ |
+| FakeNFT         | 0xc9991a0904206da66891156e83170fef61a27c19 |
+| TalentVerifier  | 0x92c99bbf8fd2d569c159bc525de2f80d1a27cc17 |
+| VerifyForwarder | 0x9df5a1d59df0b88f63f280d4ad95b238a885e391 |
+| NoxxABT         | 0x7c511681d8effda3c8695b8af8070c17b720a501 |
 
 # Verify
 
