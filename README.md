@@ -35,7 +35,7 @@ $ forge verify-contract --chain 80001 {ContractAddress} src/FakeNFT.sol:FakeNFT 
 ### 1. Generate final key, and export Verifier.sol and verification key
 
 ```
-$ yarn ts-node scripts/generateFinalKey.ts
+$ yarn ts-node node-script/generateFinalKey.ts
 ```
 
 ### 2. Generate proof

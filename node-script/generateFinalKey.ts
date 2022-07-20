@@ -8,7 +8,7 @@ const exec = util.promisify(require('child_process').exec);
 
 async function main() {
   const buildPath = './circuit';
-  const solidityVersion = '^0.8.13';
+  const solidityVersion = '0.8.13';
 
   if (!fs.existsSync(buildPath)) {
     fs.mkdirSync(buildPath, { recursive: true });
