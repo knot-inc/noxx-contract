@@ -43,7 +43,7 @@ async function main() {
   );
 
   // Export verifier code
-  let verifierCode = await zKey.exportSolidityVerifier(
+  let verifierCode = (await zKey.exportSolidityVerifier(
     `${buildPath}/verifytalent_final.zkey`,
     {
       groth16: fs.readFileSync(
@@ -52,12 +52,18 @@ async function main() {
       ),
     },
     logger,
-  );
+  )) as string;
 
   // Replace solidity version
   verifierCode = verifierCode.replace(
-    /pragma solidity \^\d+\.\d+\.\d+/,
-    `pragma solidity ^${solidityVersion}`,
+    /pragma solidity \^\d+\.\d+\.\d+;/,
+    `pragma solidity ^${solidityVersion};\nimport './interfaces/IVerifier.sol';`,
+  );
+
+  // Add verifier interface
+  verifierCode = verifierCode.replace(
+    /contract Verifier {/,
+    'contract Verifier is IVerifier {',
   );
 
   fs.writeFileSync('./src/TalentVerifier.sol', verifierCode, 'utf-8');
