@@ -4,25 +4,27 @@ pragma solidity ^0.8.13;
 import 'forge-std/Test.sol';
 import '../helpers/SigUtils.sol';
 import '../Forwarder.sol';
-import '../interfaces/IVerifier.sol';
+import '../interfaces/INoxx.sol';
 
-contract TestVerifier is IVerifier {
+contract TextNoxx is INoxx {
   // No parameters required
   // https://forum.openzeppelin.com/t/unused-function-parameter-in-overriding-function-how-to-avoid-compiler-warning/20883
-  function verifyProof(
-    uint256[2] memory,
-    uint256[2][2] memory,
-    uint256[2] memory,
-    uint256[1] memory
-  ) external pure override returns (bool) {
+  function executeProofVerification(
+    uint256[8] calldata,
+    uint256[1] calldata,
+    address
+  ) external pure returns (bool) {
     return true;
   }
+
+  /// @dev mintNFT if user is in the allowed list
+  function mintNFT(address to, string memory _tokenURI) external {}
 }
 
 contract ForwarderTest is Test {
   SigUtils internal sigUtils;
   Forwarder internal forwarder;
-  TestVerifier internal verifier;
+  TextNoxx internal noxx;
 
   uint256 internal userPrivateKey;
   uint256 internal spenderPrivateKey;
@@ -35,7 +37,7 @@ contract ForwarderTest is Test {
   uint256[1] internal input = [1];
 
   function setUp() public {
-    verifier = new TestVerifier();
+    noxx = new TextNoxx();
     forwarder = new Forwarder('VerifyForwarder', '1.0.0');
 
     sigUtils = new SigUtils(forwarder.DOMAIN_SEPARATOR());
@@ -55,7 +57,7 @@ contract ForwarderTest is Test {
   function test_canExecuteWhenInputIsCorrect() public {
     Forwarder.ForwardRequest memory req = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: 0
     });
 
@@ -71,7 +73,7 @@ contract ForwarderTest is Test {
     forwarder.addSenderToWhitelist(spender);
     Forwarder.ForwardRequest memory req = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: 0
     });
 
@@ -88,7 +90,7 @@ contract ForwarderTest is Test {
     uint256 nonce_1 = forwarder.getNonce(user);
     Forwarder.ForwardRequest memory req = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: nonce_1
     });
     emit log_uint(nonce_1);
@@ -101,7 +103,7 @@ contract ForwarderTest is Test {
     emit log_uint(nonce_2);
     Forwarder.ForwardRequest memory req_2 = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: nonce_2
     });
     bytes32 digest_2 = sigUtils.getTypedDataHash(req_2);
@@ -113,7 +115,7 @@ contract ForwarderTest is Test {
   function test_cannotExecuteWhenNonceIsUsedTwice() public {
     Forwarder.ForwardRequest memory req = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: 0
     });
 
@@ -128,7 +130,7 @@ contract ForwarderTest is Test {
   function test_cannotExecuteWhenSignatureIncorrect() public {
     Forwarder.ForwardRequest memory req = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: 0
     });
     bytes32 digest = sigUtils.getTypedDataHash(req);
@@ -141,7 +143,7 @@ contract ForwarderTest is Test {
   function test_cannotExecuteWhenNotInwhiteList() public {
     Forwarder.ForwardRequest memory req = Forwarder.ForwardRequest({
       from: user,
-      verifier: address(verifier),
+      verifier: address(noxx),
       nonce: 0
     });
 

@@ -5,7 +5,7 @@ import '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
 import '@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
-import './interfaces/IVerifier.sol';
+import './interfaces/INoxx.sol';
 
 /**
  * @title Forwarder Smart Contract
@@ -141,7 +141,7 @@ contract Forwarder is Ownable, Pausable, EIP712 {
     );
     _nonces[req.from] = req.nonce + 1;
 
-    bool verified = _verifyProof(req.verifier, proof, input);
+    bool verified = _verifyProof(req.from, req.verifier, proof, input);
 
     emit MetaTransactionExecuted(req.from, req.verifier, verified);
 
@@ -150,18 +150,13 @@ contract Forwarder is Ownable, Pausable, EIP712 {
 
   /// @dev Verify zk proof
   function _verifyProof(
+    address from,
     address verifier,
     uint256[8] calldata proof,
     uint256[1] calldata input
-  ) internal view returns (bool) {
-    IVerifier verifierContract = IVerifier(verifier);
-    return
-      verifierContract.verifyProof(
-        [proof[0], proof[1]],
-        [[proof[2], proof[3]], [proof[4], proof[5]]],
-        [proof[6], proof[7]],
-        input
-      );
+  ) internal returns (bool) {
+    INoxx noxxContract = INoxx(verifier);
+    return noxxContract.executeProofVerification(proof, input, from);
   }
 
   /// @dev Only whitelisted addresses are allowed to broadcast meta-transactions.

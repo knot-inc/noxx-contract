@@ -12,7 +12,6 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.13;
-import './interfaces/IVerifier.sol';
 library Pairing {
     struct G1Point {
         uint X;
@@ -162,7 +161,7 @@ library Pairing {
         return pairing(p1, p2);
     }
 }
-contract Verifier is IVerifier {
+contract Verifier {
     using Pairing for *;
     struct VerifyingKey {
         Pairing.G1Point alfa1;
