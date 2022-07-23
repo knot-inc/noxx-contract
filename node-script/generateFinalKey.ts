@@ -56,14 +56,8 @@ async function main() {
 
   // Replace solidity version
   verifierCode = verifierCode.replace(
-    /pragma solidity \^\d+\.\d+\.\d+;/,
-    `pragma solidity ^${solidityVersion};\nimport './interfaces/IVerifier.sol';`,
-  );
-
-  // Add verifier interface
-  verifierCode = verifierCode.replace(
-    /contract Verifier {/,
-    'contract Verifier is IVerifier {',
+    /pragma solidity \^\d+\.\d+\.\d+/,
+    `pragma solidity ^${solidityVersion}`,
   );
 
   fs.writeFileSync('./src/TalentVerifier.sol', verifierCode, 'utf-8');
