@@ -23,9 +23,10 @@ $ forge script script/FakeNFT.s.sol:FakeNFTScript --rpc-url $RPC_URL --private-k
 | Contract        | Address                                    |
 | --------------- | ------------------------------------------ |
 | FakeNFT         | 0xc9991a0904206da66891156e83170fef61a27c19 |
-| TalentVerifier  | 0x92c99bbf8fd2d569c159bc525de2f80d1a27cc17 |
-| VerifyForwarder | 0x9df5a1d59df0b88f63f280d4ad95b238a885e391 |
+| TalentVerifier  | 0x6bbf732b5d9d364116a10b248b3e09b9ce580c54 |
+| VerifyForwarder | 0x3d26857ca23dc747520af6e3216f1d3bba870558 |
 | NoxxABT         | 0x7c511681d8effda3c8695b8af8070c17b720a501 |
+| Noxx            | 0x4f5e3d61c4bb929e844c7702acde5f6ba78d8a57 |
 
 # Verify
 
