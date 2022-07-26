@@ -1,4 +1,7 @@
+import 'dotenv/config';
 import { ethers, providers, Wallet } from 'ethers';
+import forwarderABI from '../abi/Forwarder.json';
+
 const alchemyApiKey = process.env.ALCHEMY_KEY;
 // Wallet key is the one who signs thus it should be the `from` account
 const walletKey = process.env.SIGNER_WALLET_KEY as string;
@@ -12,15 +15,15 @@ export const genSignature = async ({
   verifierContract: string;
   forwarderContract: string;
 }) => {
-  const wallet = new Wallet(walletKey);
   const provider = new providers.AlchemyProvider('maticmum', alchemyApiKey);
+  const wallet = new Wallet(walletKey).connect(provider);
   console.log({ walletPubKey: wallet.publicKey });
 
   const domain = {
     name: 'VerifyForwarder',
     version: '1.0.0',
     chainId: 80001, // mumbai
-    forwarderContract,
+    verifyingContract: forwarderContract,
   };
 
   const types = {
@@ -43,10 +46,16 @@ export const genSignature = async ({
     ],
   };
 
+  // get nonce from the network
+  const contract = new ethers.Contract(forwarderContract, forwarderABI, wallet);
+  const getNonceTx = await contract.connect(wallet).getNonce(from);
+  const nonce = getNonceTx.toNumber();
+  console.log('Curent nonce', nonce);
+
   const value = {
     from,
     verifier: verifierContract,
-    nonce: 0,
+    nonce,
   };
   const signature = await wallet
     .connect(provider)
@@ -62,7 +71,7 @@ export const genSignature = async ({
   return true;
 };
 
-// Call `yarn ts-node node-script/generateSignature.ts 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 0x92c99bbf8fd2d569c159bc525de2f80d1a27cc17 0x9df5a1d59df0b88f63f280d4ad95b238a885e391`
+// Call `yarn ts-node node-script/generateSignature.ts 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 0x4f5e3d61c4bb929e844c7702acde5f6ba78d8a57 0x3d26857ca23dc747520af6e3216f1d3bba870558`
 console.log(
   `from ${process.argv[2]}, VerifierContract: ${process.argv[3]}, ForwarderContract: ${process.argv[4]}`,
 );

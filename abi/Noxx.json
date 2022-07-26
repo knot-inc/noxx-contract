@@ -1,0 +1,6 @@
+[
+"constructor(address _verifier, address _noxxABT)",
+"function executeProofVerification(uint256[8] proof, uint256[1] input, address from) returns (bool)",
+"function isVerifiedAccount(address account) view returns (bool)",
+"function mintNFT(address to, string _tokenURI)"
+]
