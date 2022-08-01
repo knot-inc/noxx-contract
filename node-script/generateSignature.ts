@@ -50,7 +50,7 @@ export const genSignature = async ({
   const contract = new ethers.Contract(forwarderContract, forwarderABI, wallet);
   const getNonceTx = await contract.connect(wallet).getNonce(from);
   const nonce = getNonceTx.toNumber();
-  console.log('Curent nonce', nonce);
+  console.log('Next nonce', nonce);
 
   const value = {
     from,
