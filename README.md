@@ -2,7 +2,7 @@
 
 ```
 yarn install && yarn prepare
-
+git submodule update --init --recursive
 ```
 
 ```
