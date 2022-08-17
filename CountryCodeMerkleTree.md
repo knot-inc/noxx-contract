@@ -6,6 +6,16 @@ The circuit also checks nonce passed from the prover to make sure the proof has 
 
 # Seeding
 
+TEST_TABLE_NAME points to your Table
+
 ```
 TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5  yarn ts-node node-script/seedingCountryCodeHashes.ts
+```
+
+# Generate MerkleProof
+
+Set CountryCode which you want to make MerkleProof
+
+```
+TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5  yarn ts-node node-script/generateCountryCodeMerkleProof.ts AX
 ```
