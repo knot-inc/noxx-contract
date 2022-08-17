@@ -72,3 +72,7 @@ The command below updates all submodules
 ```
 git submodule update --recursive --remote --merge
 ```
+
+# MerkleTree for CountryCode
+
+See [MerkleTree](./CountryCodeMerkleTree.md)
