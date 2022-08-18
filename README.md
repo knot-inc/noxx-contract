@@ -67,6 +67,14 @@ $ yarn snarkjs groth16 verify verification_key.json public.json proof.json
 [INFO]  snarkJS: OK!
 ```
 
+### Appendix. Generate proof for Solidity
+
+Generates Solidity inputs. Result will be in `input.txt`
+
+```
+$ TEST_TABLE_NAME={Table of MerkleTree}  yarn ts-node node-script/generateSolidityInputs.ts
+```
+
 # Updating submodule
 
 The command below updates all submodules
