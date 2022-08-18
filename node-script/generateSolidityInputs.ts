@@ -8,20 +8,26 @@ import {
   generateGroth16Proof,
   packToSolidityProof,
 } from './zk-tools/lib';
+import { generateMerkleProof } from './utils/generateMerkleProof';
 
 // Generate Solidity inputs for testing purpose
 async function main() {
   // Create inputs
   const poseidon = await buildPoseidon();
-  const commitment: bigint = encodeStringToBigInt('Chris Nye');
+  const name: bigint = encodeStringToBigInt('Chris Nye');
   const nonce: bigint = encodeStringToBigInt('5678');
-
-  const hash = createPoseidonHash(poseidon, [commitment, nonce]);
-  console.log({ commitment, nonce, hash });
+  const age: bigint = BigNumber.from(20) as unknown as bigint;
+  const country: bigint = encodeStringToBigInt('BR');
+  const commits = [name, age, country].map((v) =>
+    createPoseidonHash(poseidon, [v, nonce]).toString(),
+  );
+  const merkleProof = await generateMerkleProof('BR');
   const witness = {
-    values: [commitment.toString()],
-    nonces: [nonce.toString()],
-    commits: [hash],
+    values: [name, age, country].map((v) => v.toString()),
+    nonces: [nonce.toString(), nonce.toString(), nonce.toString()],
+    commits,
+    age: 18,
+    ...merkleProof,
   };
 
   const wasmFilePath = './circuit/verifytalent.wasm';
@@ -42,7 +48,9 @@ async function main() {
   if (fs.existsSync(inputPath)) {
     fs.unlinkSync(inputPath);
   }
-  const input = BigNumber.from(publicSignals[0]).toHexString();
+  const input = publicSignals.map((signal) =>
+    BigNumber.from(signal).toHexString(),
+  );
   fs.openSync(inputPath, 'w');
   fs.writeFileSync(
     inputPath,
