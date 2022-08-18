@@ -38,6 +38,8 @@ $ forge verify-contract --chain 80001 {ContractAddress} src/FakeNFT.sol:FakeNFT 
 
 # Circuit
 
+Install circom to your system. See https://docs.circom.io/getting-started/installation for the instruction
+
 ### 1. Generate final key, and export Verifier.sol and verification key
 
 ```
