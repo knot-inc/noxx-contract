@@ -27,7 +27,7 @@ async function main() {
   // Generate zkey from ptau(first contribution, second contribution)
   await zKey.newZKey(
     `${buildPath}/verifytalent.r1cs`,
-    `${buildPath}/powersOfTau28_hez_final_10.ptau`,
+    `${buildPath}/powersOfTau28_hez_final_12.ptau`,
     `${buildPath}/verifytalent_0000.zkey`,
     logger,
   );
