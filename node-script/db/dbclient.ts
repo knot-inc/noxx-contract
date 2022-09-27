@@ -22,9 +22,10 @@ const translateConfig = { marshallOptions, unmarshallOptions };
 // Set the AWS Region.
 const REGION = 'us-west-2'; //e.g. "us-east-1"
 // Create an Amazon DynamoDB service client object.
+const PROFILE = process.env.PROFILE as string;
 const ddbClient = new DynamoDBClient({
   region: REGION,
-  credentials: fromIni({ profile: 'noxx' }),
+  credentials: fromIni({ profile: PROFILE }),
 });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 
