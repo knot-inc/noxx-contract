@@ -11,7 +11,7 @@ contract TextNoxx is INoxx {
   // https://forum.openzeppelin.com/t/unused-function-parameter-in-overriding-function-how-to-avoid-compiler-warning/20883
   function executeProofVerification(
     uint256[8] calldata,
-    uint256[1] calldata,
+    uint256[4] calldata,
     address
   ) external pure returns (bool) {
     return true;
@@ -34,7 +34,12 @@ contract ForwarderTest is Test {
   address internal spender;
 
   uint256[8] internal proof = [0, 1, 2, 3, 4, 5, 6, 7];
-  uint256[1] internal input = [1];
+  uint256[4] internal input = [
+    20199178195905961735016964499017101892030965751975447305563774106156390243229,
+    8819208578747443403144689107172414148408385498253978002562079324362344755523,
+    3998228618412097657774020135623673392269184037010946178179137544382082909182,
+    18
+  ];
 
   function setUp() public {
     noxx = new TextNoxx();

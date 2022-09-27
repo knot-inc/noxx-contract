@@ -11,9 +11,10 @@ contract TestVerifier is IVerifier {
     uint256[2] memory,
     uint256[2][2] memory,
     uint256[2] memory,
-    uint256[1] memory input // changes depending on public inputs
+    uint256[4] memory input
   ) external pure returns (bool) {
-    return (input[0] == 1);
+    return (input[0] ==
+      20199178195905961735016964499017101892030965751975447305563774106156390243229);
   }
 }
 
@@ -39,7 +40,12 @@ contract NoxxTest is Test {
   address internal from;
 
   uint256[8] internal proof = [0, 1, 2, 3, 4, 5, 6, 7];
-  uint256[1] internal input = [1];
+  uint256[4] internal input = [
+    20199178195905961735016964499017101892030965751975447305563774106156390243229,
+    8819208578747443403144689107172414148408385498253978002562079324362344755523,
+    3998228618412097657774020135623673392269184037010946178179137544382082909182,
+    18
+  ];
 
   function setUp() public {
     noxxABT = new TestABT();
@@ -58,8 +64,11 @@ contract NoxxTest is Test {
   function test_executeProofVerificationReturnsFailsWhenProofIsInvalid()
     public
   {
-    uint256[1] memory invalidInput = [
-      0x013840eb3fa139e182121fbf0d9a3ed55dbf9d76ca28c7523c2ca6206c834dae
+    uint256[4] memory invalidInput = [
+      0x013840eb3fa139e182121fbf0d9a3ed55dbf9d76ca28c7523c2ca6206c834dae,
+      8819208578747443403144689107172414148408385498253978002562079324362344755523,
+      3998228618412097657774020135623673392269184037010946178179137544382082909182,
+      18
     ];
     vm.expectRevert('Proof Verification failed');
     noxx.executeProofVerification(proof, invalidInput, from);

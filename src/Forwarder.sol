@@ -105,7 +105,7 @@ contract Forwarder is Ownable, Pausable, EIP712 {
   function executeWithSignature(
     ForwardRequest calldata req,
     uint256[8] calldata proof,
-    uint256[1] calldata input,
+    uint256[4] calldata input,
     bytes memory signature
   ) public payable whenNotPaused returns (bool) {
     bytes32 r;
@@ -124,7 +124,7 @@ contract Forwarder is Ownable, Pausable, EIP712 {
   function execute(
     ForwardRequest calldata req,
     uint256[8] calldata proof,
-    uint256[1] calldata input,
+    uint256[4] calldata input,
     uint8 v,
     bytes32 r,
     bytes32 s
@@ -153,7 +153,7 @@ contract Forwarder is Ownable, Pausable, EIP712 {
     address from,
     address verifier,
     uint256[8] calldata proof,
-    uint256[1] calldata input
+    uint256[4] calldata input
   ) internal returns (bool) {
     INoxx noxxContract = INoxx(verifier);
     return noxxContract.executeProofVerification(proof, input, from);
