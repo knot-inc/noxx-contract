@@ -5,7 +5,7 @@ interface INoxx {
   /// @dev Verify zk proof, if valid then add to the allowed list
   function executeProofVerification(
     uint256[8] calldata proof,
-    uint256[1] calldata input,
+    uint256[4] calldata input,
     address from
   ) external returns (bool);
 
