@@ -9,7 +9,7 @@ The circuit also checks nonce passed from the prover to make sure the proof has 
 TEST_TABLE_NAME points to your Table
 
 ```
-TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5  yarn ts-node node-script/seedingCountryCodeHashes.ts
+TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5 PROFILE=noxx  yarn ts-node node-script/seedingCountryCodeHashes.ts
 ```
 
 # Generate MerkleProof
@@ -17,5 +17,5 @@ TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5  yarn ts-
 Set CountryCode which you want to make MerkleProof
 
 ```
-TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5  yarn ts-node node-script/generateCountryCodeMerkleProof.ts AX
+TEST_TABLE_NAME=TempStack-MerkleTreeDBMerkleTree3F9A2B5E-11V6XWNRSHDI5 PROFILE=noxx  yarn ts-node node-script/generateCountryCodeMerkleProof.ts AX
 ```

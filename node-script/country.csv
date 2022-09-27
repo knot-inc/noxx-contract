@@ -53,7 +53,6 @@ Cook Islands,CK,COK,184,ISO 3166-2:CK
 Costa Rica,CR,CRI,188,ISO 3166-2:CR
 Côte d'Ivoire,CI,CIV,384,ISO 3166-2:CI
 Croatia,HR,HRV,191,ISO 3166-2:HR
-Cuba,CU,CUB,192,ISO 3166-2:CU
 Cyprus,CY,CYP,196,ISO 3166-2:CY
 Czech Republic,CZ,CZE,203,ISO 3166-2:CZ
 Denmark,DK,DNK,208,ISO 3166-2:DK
@@ -100,7 +99,7 @@ Hungary,HU,HUN,348,ISO 3166-2:HU
 Iceland,IS,ISL,352,ISO 3166-2:IS
 India,IN,IND,356,ISO 3166-2:IN
 Indonesia,ID,IDN,360,ISO 3166-2:ID
-"Iran, Islamic Republic of",IR,IRN,364,ISO 3166-2:IR
+Iraq,IQ,IRQ,368,ISO 3166-2:IQ
 Ireland,IE,IRL,372,ISO 3166-2:IE
 Isle of Man,IM,IMN,833,ISO 3166-2:IM
 Israel,IL,ISR,376,ISO 3166-2:IL
@@ -203,13 +202,11 @@ South Africa,ZA,ZAF,710,ISO 3166-2:ZA
 South Georgia and the South Sandwich Islands,GS,SGS,239,ISO 3166-2:GS
 Spain,ES,ESP,724,ISO 3166-2:ES
 Sri Lanka,LK,LKA,144,ISO 3166-2:LK
-Sudan,SD,SDN,736,ISO 3166-2:SD
 Suriname,SR,SUR,740,ISO 3166-2:SR
 Svalbard and Jan Mayen,SJ,SJM,744,ISO 3166-2:SJ
 Swaziland,SZ,SWZ,748,ISO 3166-2:SZ
 Sweden,SE,SWE,752,ISO 3166-2:SE
 Switzerland,CH,CHE,756,ISO 3166-2:CH
-Syrian Arab Republic,SY,SYR,760,ISO 3166-2:SY
 "Taiwan, Province of China",TW,TWN,158,ISO 3166-2:TW
 Tajikistan,TJ,TJK,762,ISO 3166-2:TJ
 "Tanzania, United Republic of",TZ,TZA,834,ISO 3166-2:TZ
