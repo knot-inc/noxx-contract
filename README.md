@@ -9,6 +9,10 @@ git submodule update --init --recursive
 forge build
 ```
 
+# Contract relationship
+![relationship](https://user-images.githubusercontent.com/6277118/192703658-1b8a464d-dc10-4822-8784-1dfc3d992a52.png)
+
+
 # Deploy Contract
 
 - Make sure .env is set properly
