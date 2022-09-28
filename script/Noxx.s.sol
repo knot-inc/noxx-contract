@@ -19,7 +19,7 @@ contract NoxxScript is Script {
     } else {
       noxxABT = 0x6bbF732B5d9d364116a10B248b3E09B9ce580C54;
     }
-    talentVerifier = 0x6bbF732B5d9d364116a10B248b3E09B9ce580C54;
+    talentVerifier = 0x479F7D70693A8d12dB15F8415BeB724eF223870f;
   }
 
   function run() public {
