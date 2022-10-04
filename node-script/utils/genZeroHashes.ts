@@ -10,7 +10,6 @@ export const genZeroHashes = (poseidon: any) => {
       level === 0
         ? zeroHash
         : createPoseidonHash(poseidon, [zeroHash, zeroHash]);
-    console.log({ level, zeroHash });
     zeroes.push(zeroHash);
   }
   return zeroes;
