@@ -173,6 +173,7 @@ export const nodesQuery = async ({
 };
 
 export const appendLeaf = async ({
+  countryCode,
   depth,
   index,
   hash,
@@ -180,6 +181,7 @@ export const appendLeaf = async ({
   poseidon,
   zeroes,
 }: {
+  countryCode: string;
   depth: number;
   index: number;
   hash: BigNumberish;
@@ -192,6 +194,7 @@ export const appendLeaf = async ({
   let node: TreeNode = {
     hash,
     id: `CountryCodeTree_0_${index}`,
+    countryCode,
     dataType: 'CountryCode',
     index,
     level: 0,
@@ -253,6 +256,7 @@ export const appendLeaf = async ({
           node?.siblinghash as string,
         ]);
         parentNode = {
+          countryCode: null,
           dataType: 'CountryCode',
           hash: parentHash,
           id: `CountryCodeTree_${parentLevel}_${parentIndex}`,

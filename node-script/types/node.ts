@@ -1,6 +1,7 @@
 import { BigNumberish } from 'ethers';
 
 export type TreeNode = {
+  countryCode?: string | null;
   dataType: string;
   hash: BigNumberish;
   id: string;
