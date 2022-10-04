@@ -45,6 +45,7 @@ async function main() {
       // encode ISO Country code
       const hash = createPoseidonHash(poseidon, [encodeStringToBigInt(arr[1])]);
       await appendLeaf({
+        countryCode: arr[1],
         depth: MERKLE_TREE_DEPTH,
         hash,
         index,

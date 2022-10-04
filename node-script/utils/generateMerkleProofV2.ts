@@ -1,12 +1,9 @@
 import fs from 'fs';
 import { genZeroHashes } from './genZeroHashes';
 import { MERKLE_TREE_DEPTH } from '../config';
-import {
-  buildPoseidon,
-  createPoseidonHash,
-  encodeStringToBigInt,
-} from '../zk-tools/lib';
+import { buildPoseidon, encodeStringToBigInt } from '../zk-tools/lib';
 import { BigNumberish } from 'ethers';
+import { TreeNode } from '../types/node';
 
 export const generateMerkleProof = async (
   path: string,
@@ -20,12 +17,11 @@ export const generateMerkleProof = async (
     const poseidon = await buildPoseidon();
     // Check the index of identityCommitment
     const zeroes = genZeroHashes(poseidon);
-    const hash = createPoseidonHash(poseidon, [
-      encodeStringToBigInt(countryCode),
-    ]);
     const str = fs.readFileSync(path, 'utf-8');
     const nodes = JSON.parse(str);
-    const leafNode = nodes.filter((node) => node.hash === hash)[0];
+    const leafNode = nodes.filter(
+      (node: TreeNode) => node.countryCode === countryCode,
+    )[0];
     const root = nodes.filter(
       (node) => node.level === MERKLE_TREE_DEPTH && node.index === 0,
     )[0];
