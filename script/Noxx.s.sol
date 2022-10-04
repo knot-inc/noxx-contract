@@ -16,10 +16,15 @@ contract NoxxScript is Script {
     if (block.chainid == 80001) {
       // Fake NFT for test environment
       noxxABT = 0xc9991A0904206da66891156e83170fEf61A27C19;
-    } else {
-      noxxABT = 0x6bbF732B5d9d364116a10B248b3E09B9ce580C54;
+    } else if (block.chainid == 137) {
+      noxxABT = 0x34E51476a53AF4b6C5C6174c457cF3bC74C59193;
     }
-    talentVerifier = 0x479F7D70693A8d12dB15F8415BeB724eF223870f;
+
+    if (block.chainid == 80001) {
+      talentVerifier = 0x479F7D70693A8d12dB15F8415BeB724eF223870f;
+    } else if (block.chainid == 137) {
+      talentVerifier = 0x230A32770B8a339871D5EF1C63675BEc9e5D3404;
+    }
   }
 
   function run() public {

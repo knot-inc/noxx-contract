@@ -8,6 +8,7 @@ out/
 /broadcast/*/31337/
 
 .env
+.prodenv
 
 node_modules
 

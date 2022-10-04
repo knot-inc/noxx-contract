@@ -15,7 +15,13 @@ forge build
 
 # Deploy Contract
 
-- Make sure .env is set properly
+- Make sure .env (for mumbai) .prodenv (for mainnet) is set properly
+
+### build
+
+```
+forge build --build-info --build-info-path buildinfo.txt --use solc:0.8.13
+```
 
 ### For mumbai test net(80001)
 
@@ -32,12 +38,33 @@ $ forge script script/FakeNFT.s.sol:FakeNFTScript --rpc-url $RPC_URL --private-k
 | NoxxABT         | 0x7c511681d8effda3c8695b8af8070c17b720a501 |
 | Noxx            | 0x27abf4e7daf06b52a953b27297fd30aa69cd539b |
 
+### For main net(137)
+
+```
+$ source .prodenv
+$ forge script --rpc-url $M_RPC_URL --verify --use solc:0.8.13 --private-key $M_PRIVATE_KEY --chain-id 137 --broadcast -vvvv --etherscan-api-key $M_SCAN_API_KEY script/Forwarder.s.sol:ForwarderScript
+```
+
+| Contract        | Address                                    |
+| --------------- | ------------------------------------------ |
+| FakeNFT         | -- NA --                                   |
+| TalentVerifier  | 0x230A32770B8a339871D5EF1C63675BEc9e5D3404 |
+| VerifyForwarder | 0x97b9333204bc6E53F9a1ff7794F01A10Cf1cdF52 |
+| NoxxABT         | 0x34E51476a53AF4b6C5C6174c457cF3bC74C59193 |
+| Noxx            | 0x52ae545990f3be7D44ed42b44b291C51bC676F7f |
+
 # Verify
 
 ### For mumbai test net(80001)
 
 ```
-$ forge verify-contract --chain 80001 {ContractAddress} src/FakeNFT.sol:FakeNFT $SCAN_API_KEY
+$ forge verify-check --chain 80001 {GUID} --etherscan-key $SCAN_API_KEY
+```
+
+### For mainnet(137)
+
+```
+$ forge verify-check --chain 137 {GUID} --etherscan-key $M_SCAN_API_KEY
 ```
 
 # Circuit
