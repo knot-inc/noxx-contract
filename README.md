@@ -36,7 +36,7 @@ $ forge script script/FakeNFT.s.sol:FakeNFTScript --rpc-url $RPC_URL --private-k
 | TalentVerifier  | 0x479f7d70693a8d12db15f8415beb724ef223870f |
 | VerifyForwarder | 0x8bb9c7c130aec8947a72ae5cd0d361b285a7b8c1 |
 | NoxxABT         | 0xc8984bcf50fe9a864b5184bb83cfd968805067b7 |
-| Noxx            | 0x27abf4e7daf06b52a953b27297fd30aa69cd539b |
+| Noxx            | 0x264b66f5113892AAEA263df76A140dF67c0f7554 |
 
 ### For main net(137)
 
@@ -50,8 +50,8 @@ $ forge script --rpc-url $M_RPC_URL --verify --use solc:0.8.13 --private-key $M_
 | FakeNFT         | -- NA --                                   |
 | TalentVerifier  | 0x230A32770B8a339871D5EF1C63675BEc9e5D3404 |
 | VerifyForwarder | 0x97b9333204bc6E53F9a1ff7794F01A10Cf1cdF52 |
-| NoxxABT         | 0x34E51476a53AF4b6C5C6174c457cF3bC74C59193 |
-| Noxx            | 0x52ae545990f3be7D44ed42b44b291C51bC676F7f |
+| NoxxABT         | 0x0e5560636b320E07f6F88297276c8B60D7B31cFf |
+| Noxx            | 0x15008034Ae7CB379f35A0C9CEfDA7b4C612c191c |
 
 # Verify
 
