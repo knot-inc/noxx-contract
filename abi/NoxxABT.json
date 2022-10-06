@@ -35,6 +35,7 @@
 "function symbol() view returns (string)",
 "function tokenByOwner(address owner) view returns (uint256)",
 "function tokenURI(uint256 tokenId) view returns (string)",
+"function tokenURIByOwner(address owner) view returns (string)",
 "function totalSupply() view returns (uint256)",
 "function transferFrom(address, address, uint256)",
 "function unpause()",

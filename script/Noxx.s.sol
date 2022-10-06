@@ -15,7 +15,7 @@ contract NoxxScript is Script {
   function setUp() public {
     if (block.chainid == 80001) {
       // Fake NFT for test environment
-      noxxABT = 0xc9991A0904206da66891156e83170fEf61A27C19;
+      noxxABT = 0x51a1B628d9a2CFb76306FDccb39E56382A64482B;
     } else if (block.chainid == 137) {
       noxxABT = 0x34E51476a53AF4b6C5C6174c457cF3bC74C59193;
     }
