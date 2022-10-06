@@ -104,9 +104,20 @@ contract NoxxABT is
     return super.tokenURI(tokenId);
   }
 
-  /// @dev return tokenId from owner address
-  function tokenByOwner(address owner) public view returns (uint256) {
+  /// @dev See {INoxxABT-tokenByOwner}.
+  function tokenByOwner(address owner) external view returns (uint256) {
     return _ownedTokens[owner];
+  }
+
+  /// @dev See {INoxxABT-tokenURIByOwner}.
+  function tokenURIByOwner(address owner)
+    external
+    view
+    returns (string memory)
+  {
+    uint256 tokenId = _ownedTokens[owner];
+    require(tokenId != 0, 'Token does not exist');
+    return super.tokenURI(tokenId);
   }
 
   // All of transfer related functions are abandoned
