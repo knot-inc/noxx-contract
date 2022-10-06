@@ -24,6 +24,9 @@ contract NoxxABT is
   bytes32 public constant MINT_ROLE = keccak256('MINT_ROLE');
   Counters.Counter private supplyCounter;
 
+  // for retrieving token id from owner address
+  mapping(address => uint256) private _ownedTokens;
+
   constructor() ERC4973('Noxx', 'NOXX') {
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     _grantRole(MINT_ROLE, msg.sender);
@@ -36,11 +39,14 @@ contract NoxxABT is
     onlyRole(MINT_ROLE)
   {
     require(balanceOf(to) == 0, 'Already minted');
+    // tokenId should start from 1
+    uint256 tokenId = totalSupply() + 1;
     // uri in ERC4973 is not used
-    _mint(to, totalSupply(), '');
-    _setTokenURI(totalSupply(), _tokenURI);
+    _mint(to, tokenId, '');
+    _setTokenURI(tokenId, _tokenURI);
+    _ownedTokens[to] = tokenId;
 
-    emit Transfer(address(0), to, totalSupply());
+    emit Transfer(address(0), to, tokenId);
 
     supplyCounter.increment();
   }
@@ -82,6 +88,9 @@ contract NoxxABT is
     internal
     override(ERC4973, ERC4973URIStorage)
   {
+    address owner = ownerOf(tokenId);
+    delete _ownedTokens[owner];
+    emit Transfer(owner, address(0), tokenId);
     super._burn(tokenId);
   }
 
@@ -93,6 +102,11 @@ contract NoxxABT is
     returns (string memory)
   {
     return super.tokenURI(tokenId);
+  }
+
+  /// @dev return tokenId from owner address
+  function tokenByOwner(address owner) public view returns (uint256) {
+    return _ownedTokens[owner];
   }
 
   // All of transfer related functions are abandoned
