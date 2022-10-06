@@ -27,6 +27,21 @@ contract TestABT is INoxxABT {
 
   function updateTokenURI(uint256 tokenId, string memory tokenURI) external {}
 
+  function tokenByOwner(address owner) external pure returns (uint256) {
+    require(owner != address(0));
+    return 0;
+  }
+
+  /// @dev See {INoxxABT-tokenURIByOwner}.
+  function tokenURIByOwner(address owner)
+    external
+    pure
+    returns (string memory)
+  {
+    require(owner != address(0));
+    return '';
+  }
+
   function isMinted(address to) public view returns (bool) {
     return minted[to];
   }

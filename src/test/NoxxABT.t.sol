@@ -71,6 +71,17 @@ contract NoxxABTTest is Test {
     abt.burn(1);
   }
 
+  function testTokenURIByOwner() public {
+    abt.mint(address(1), 'https://test/0');
+    assertEq(abt.tokenURIByOwner(address(1)), 'https://test/0');
+  }
+
+  function testCannotRetrieveTokenURIByOwner() public {
+    abt.mint(address(1), 'https://test/0');
+    vm.expectRevert("tokenURI: token doesn't exist");
+    abt.tokenURI(2);
+  }
+
   function testCanPauseMint() public {
     abt.pause();
     vm.expectRevert('Pausable: paused');
