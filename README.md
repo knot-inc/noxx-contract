@@ -67,7 +67,35 @@ $ forge verify-check --chain 80001 {GUID} --etherscan-key $SCAN_API_KEY
 $ forge verify-check --chain 137 {GUID} --etherscan-key $M_SCAN_API_KEY
 ```
 
-# Circuit
+# Zero-knowledge proof
+
+## What is ZK proof
+
+- A proof such that
+  - A legal name from KYC matches given user inputs
+  - Age is over 18
+  - A residential country is not restricted to work with a company in the US(Noxx)
+
+## Circuits
+
+Circuit is written in circom:[here](https://github.com/knot-inc/noxx-contract/blob/main/circuit/verifytalent.circom)
+
+- Private inputs
+  - name
+  - residential country(from tax document)
+  - age(based on their DOB)
+  - nonce(Generated in the local PC to ensure the values have not been tampered)
+- Public inputs
+  - commitments that are paired with private inputs. Generated with `poseidonHash(val, nonce)`
+  - age: 18, we expect this user is above 18
+- Verification
+  - Checks `poseidonHash(value, nonce) == commitment` for each field
+  - Checks range proof for `age`
+  - Checks `country` is in the Merkle tree of allowed countries (see [MerkleTree](https://github.com/knot-inc/noxx-contract/blob/main/CountryCodeMerkleTree.md))
+
+### Workflow
+
+## Development
 
 Install circom to your system. See https://docs.circom.io/getting-started/installation for the instruction
 
