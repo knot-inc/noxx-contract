@@ -76,6 +76,10 @@ $ forge verify-check --chain 137 {GUID} --etherscan-key $M_SCAN_API_KEY
   - Age is over 18
   - A residential country is not restricted to work with a company in the US(Noxx)
 
+## Workflow
+
+![](https://github.com/knot-inc/noxx-contract/blob/main/zkp-workflow.png)
+
 ## Circuits
 
 Circuit is written in circom:[here](https://github.com/knot-inc/noxx-contract/blob/main/circuit/verifytalent.circom)
@@ -92,8 +96,6 @@ Circuit is written in circom:[here](https://github.com/knot-inc/noxx-contract/bl
   - Checks `poseidonHash(value, nonce) == commitment` for each field
   - Checks range proof for `age`
   - Checks `country` is in the Merkle tree of allowed countries (see [MerkleTree](https://github.com/knot-inc/noxx-contract/blob/main/CountryCodeMerkleTree.md))
-
-### Workflow
 
 ## Development
 
