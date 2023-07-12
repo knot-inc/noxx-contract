@@ -1,6 +1,8 @@
 {
   "solidity.packageDefaultDependenciesContractsDirectory": "src",
   "solidity.packageDefaultDependenciesDirectory": "lib",
+  "solidity.remappings": [ "forge-std/=lib/forge-std/src/", 
+                     "@openzeppelin/=lib/openzeppelin-contracts/",],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

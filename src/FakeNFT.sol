@@ -21,11 +21,10 @@ contract FakeNFT is INoxxABT, ERC721URIStorage, Pausable, AccessControl {
     _grantRole(MINT_ROLE, msg.sender);
   }
 
-  function mint(address to, string memory _tokenURI)
-    external
-    whenNotPaused
-    onlyRole(MINT_ROLE)
-  {
+  function mint(
+    address to,
+    string memory _tokenURI
+  ) external whenNotPaused onlyRole(MINT_ROLE) {
     // tokenId should start from 1
     uint256 tokenId = totalSupply() + 1;
     _mint(to, tokenId);
@@ -35,10 +34,10 @@ contract FakeNFT is INoxxABT, ERC721URIStorage, Pausable, AccessControl {
     supplyCounter.increment();
   }
 
-  function updateTokenURI(uint256 _tokenId, string memory _tokenURI)
-    external
-    onlyRole(MINT_ROLE)
-  {
+  function updateTokenURI(
+    uint256 _tokenId,
+    string memory _tokenURI
+  ) external onlyRole(MINT_ROLE) {
     _setTokenURI(_tokenId, _tokenURI);
   }
 
@@ -68,22 +67,17 @@ contract FakeNFT is INoxxABT, ERC721URIStorage, Pausable, AccessControl {
   }
 
   /// @dev See {INoxxABT-tokenURIByOwner}.
-  function tokenURIByOwner(address owner)
-    external
-    view
-    returns (string memory)
-  {
+  function tokenURIByOwner(
+    address owner
+  ) external view returns (string memory) {
     uint256 tokenId = _ownedTokens[owner];
     require(tokenId != 0, 'Token does not exist');
     return super.tokenURI(tokenId);
   }
 
-  function supportsInterface(bytes4 interfaceId)
-    public
-    view
-    override(ERC721, AccessControl)
-    returns (bool)
-  {
+  function supportsInterface(
+    bytes4 interfaceId
+  ) public view override(AccessControl, ERC721URIStorage) returns (bool) {
     return super.supportsInterface(interfaceId);
   }
 }
