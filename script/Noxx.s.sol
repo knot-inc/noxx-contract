@@ -3,10 +3,10 @@ pragma solidity ^0.8.13;
 
 import 'forge-std/Script.sol';
 import '../src/Noxx.sol';
-import '../src/TalentVerifier.sol';
+import '../src/TalentVerifierV2.sol';
 import '../src/NoxxABT.sol';
 import '../src/interfaces/INoxxABT.sol';
-import '../src/interfaces/IVerifier.sol';
+import '../src/interfaces/IUltraVerifier.sol';
 
 contract NoxxScript is Script {
   address internal noxxABT;
@@ -29,7 +29,7 @@ contract NoxxScript is Script {
 
   function run() public {
     vm.broadcast();
-    new Noxx(IVerifier(talentVerifier), INoxxABT(noxxABT));
+    new Noxx(IUltraVerifier(talentVerifier), INoxxABT(noxxABT));
     vm.stopBroadcast();
   }
 }

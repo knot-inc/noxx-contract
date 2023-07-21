@@ -3,36 +3,31 @@ pragma solidity ^0.8.13;
 
 import './interfaces/INoxx.sol';
 import './interfaces/INoxxABT.sol';
-import './interfaces/IVerifier.sol';
+import './interfaces/IUltraVerifier.sol';
 
 /// @title Contract that manages proof verification/minting
 /// @author Tomo
 /// @dev does proof verification and mint in the separate process.
 contract Noxx is INoxx {
-  IVerifier verifier;
+  IUltraVerifier verifier;
   INoxxABT noxxABT;
 
   /// mapping for checking verifications
   mapping(address => bool) private verifiedAccounts;
 
-  constructor(IVerifier _verifier, INoxxABT _noxxABT) {
+  constructor(IUltraVerifier _verifier, INoxxABT _noxxABT) {
     verifier = _verifier;
     noxxABT = _noxxABT;
   }
 
   /// @dev Verify zk proof, if valid then add to the allowed list
   function executeProofVerification(
-    uint256[8] calldata proof,
-    uint256[4] calldata input,
+    bytes memory proof,
+    bytes32[] memory publicInputs,
     address from
   ) external returns (bool) {
-    // See IVerifier for detail
-    bool isValid = verifier.verifyProof(
-      [proof[0], proof[1]],
-      [[proof[2], proof[3]], [proof[4], proof[5]]],
-      [proof[6], proof[7]],
-      input
-    );
+    // See IUltraVerifier for detail
+    bool isValid = verifier.verify(proof, publicInputs);
     require(isValid, 'Proof Verification failed');
     verifiedAccounts[from] = true;
     return isValid;

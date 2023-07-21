@@ -4,8 +4,8 @@ pragma solidity ^0.8.13;
 interface INoxx {
   /// @dev Verify zk proof, if valid then add to the allowed list
   function executeProofVerification(
-    uint256[8] calldata proof,
-    uint256[4] calldata input,
+    bytes memory proof,
+    bytes32[] memory publicInputs,
     address from
   ) external returns (bool);
 

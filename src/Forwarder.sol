@@ -104,8 +104,8 @@ contract Forwarder is Ownable, Pausable, EIP712 {
   /// @dev execute with signature
   function executeWithSignature(
     ForwardRequest calldata req,
-    uint256[8] calldata proof,
-    uint256[4] calldata input,
+    bytes memory proof,
+    bytes32[] memory publicInputs,
     bytes memory signature
   ) public payable whenNotPaused returns (bool) {
     bytes32 r;
@@ -117,14 +117,14 @@ contract Forwarder is Ownable, Pausable, EIP712 {
       v := byte(0, mload(add(signature, 0x60)))
     }
 
-    return execute(req, proof, input, v, r, s);
+    return execute(req, proof, publicInputs, v, r, s);
   }
 
   /// @dev Main function; executes the meta-transaction via a low-level call.
   function execute(
     ForwardRequest calldata req,
-    uint256[8] calldata proof,
-    uint256[4] calldata input,
+    bytes memory proof,
+    bytes32[] memory publicInputs,
     uint8 v,
     bytes32 r,
     bytes32 s
@@ -141,7 +141,7 @@ contract Forwarder is Ownable, Pausable, EIP712 {
     );
     _nonces[req.from] = req.nonce + 1;
 
-    bool verified = _verifyProof(req.from, req.verifier, proof, input);
+    bool verified = _verifyProof(req.from, req.verifier, proof, publicInputs);
 
     emit MetaTransactionExecuted(req.from, req.verifier, verified);
 
@@ -152,11 +152,11 @@ contract Forwarder is Ownable, Pausable, EIP712 {
   function _verifyProof(
     address from,
     address verifier,
-    uint256[8] calldata proof,
-    uint256[4] calldata input
+    bytes memory proof,
+    bytes32[] memory publicInputs
   ) internal returns (bool) {
     INoxx noxxContract = INoxx(verifier);
-    return noxxContract.executeProofVerification(proof, input, from);
+    return noxxContract.executeProofVerification(proof, publicInputs, from);
   }
 
   /// @dev Only whitelisted addresses are allowed to broadcast meta-transactions.
