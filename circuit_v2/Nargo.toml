@@ -1,5 +1,6 @@
 [package]
 authors = [""]
-compiler_version = "0.6.0"
+compiler_version = "0.7.1"
 
 [dependencies]
+noir_merkleroot = { tag = "v0.1.1", git = "https://github.com/tomoima525/noir-merkle-root" }

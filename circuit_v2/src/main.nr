@@ -1,5 +1,5 @@
 use dep::std;
-mod merkle_poseidon;
+use dep::noir_merkleroot;
 
 fn main(
     values: [Field; 3], // private inputs, in the order of name, age, countrycode
@@ -20,7 +20,7 @@ fn main(
     assert(age as u32 <= values[1] as u32);
 
     // CountryCode eligibility check
-    let new_root = merkle_poseidon::compute_merkle_root(leaf, path_indices, siblings);
+    let new_root = noir_merkleroot::compute_merkle_root(leaf, path_indices, siblings);
     assert(new_root == root);
 }
 
