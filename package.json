@@ -1,20 +1,18 @@
 {
   "name": "noxx-contract",
-  "packageManager": "yarn@3.2.1",
   "author": "tomo",
+  "packageManager": "pnpm@8.6.7",
   "license": "MIT",
   "scripts": {
-    "prepare": "yarn husky install",
+    "prepare": "pnpm husky install",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "genHRABI": "ts-node node-script/genHumanReadableABI.ts",
-    "genFinalKey": "ts-node node-script/generateFinalKey.ts"
+    "genHRABI": "ts-node node-script/genHumanReadableABI.ts"
   },
   "devDependencies": {
     "@types/node": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
-    "@yarnpkg/sdks": "^3.0.0-rc.12",
     "dts-gen": "^0.6.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
