@@ -82,7 +82,7 @@ $ forge verify-check --chain 137 {GUID} --etherscan-key $M_SCAN_API_KEY
 
 ## Circuits
 
-Circuit is written in circom:[here](https://github.com/knot-inc/noxx-contract/blob/main/circuit/verifytalent.circom)
+Circuit is written in Noir:[here](https://github.com/knot-inc/noxx-contract/blob/main/circuit_v2/src/main.noir)
 
 - Private inputs
   - name
@@ -99,33 +99,34 @@ Circuit is written in circom:[here](https://github.com/knot-inc/noxx-contract/bl
 
 ## Development
 
-Install circom to your system. See https://docs.circom.io/getting-started/installation for the instruction
+Install Noir to your system. See https://noir-lang.org/ for the instruction. 0.7.1+ is required.
 
-### 1. Generate final key, and export Verifier.sol and verification key
+### 1. Generate Verifier.sol
 
 ```
-$ yarn ts-node node-script/generateFinalKey.ts
+$ nargo codegen-verifier
+```
+
+Place it under `src/`
+
+```
+cp plonk_vk.sol src/TalentVerifierV2.sol
 ```
 
 ### 2. Generate proof
 
+Prepare Prover.toml
+
 ```
-// convert r1cs to json
-$ yarn snarkjs r1cs export json verifytalent.r1cs verifytalent.r1cs.json
-
-
-// Generate witness
-$ node verifytalent_js/generate_witness.js verifytalent.wasm input.json witness.wtns
-
-// Generate the proof
-$ yarn snarkjs groth16 prove verifytalent_final.zkey witness.wtns proof.json public.json
+$ nargo prove p
 ```
+
+This will generate `proofs/p.proof`
 
 ### 3. Verify the proof
 
 ```
-$ yarn snarkjs groth16 verify verification_key.json public.json proof.json
-[INFO]  snarkJS: OK!
+$ nargo verify p
 ```
 
 ### Appendix. Generate proof for Solidity
