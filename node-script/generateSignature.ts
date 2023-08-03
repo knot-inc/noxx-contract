@@ -6,6 +6,8 @@ const alchemyApiKey = process.env.ALCHEMY_KEY;
 // Wallet key is the one who signs thus it should be the `from` account
 const walletKey = process.env.SIGNER_WALLET_KEY as string;
 
+const env = process.env.ENV || 'local';
+
 export const genSignature = async ({
   from,
   verifierContract,
@@ -15,14 +17,26 @@ export const genSignature = async ({
   verifierContract: string;
   forwarderContract: string;
 }) => {
-  const provider = new providers.AlchemyProvider('maticmum', alchemyApiKey);
-  const wallet = new Wallet(walletKey).connect(provider);
-  console.log({ walletPubKey: wallet.publicKey });
+  console.log('env', env);
+  let provider =
+    env === 'local'
+      ? new providers.JsonRpcProvider('http://localhost:8545')
+      : new providers.AlchemyProvider('maticmum', alchemyApiKey);
+  const wallet = new Wallet(
+    env === 'local'
+      ? '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d'
+      : walletKey,
+  ).connect(provider);
+  console.log({
+    walletPubKey: wallet.address,
+    provider: provider.connection.url,
+  });
 
   const domain = {
     name: 'VerifyForwarder',
     version: '1.0.0',
-    chainId: 80001, // mumbai
+    // chainId: 80001, // mumbai
+    chainId: 31337, // hardhat
     verifyingContract: forwarderContract,
   };
 
@@ -48,6 +62,9 @@ export const genSignature = async ({
 
   // get nonce from the network
   const contract = new ethers.Contract(forwarderContract, forwarderABI, wallet);
+  console.log('contract', contract);
+  const isPaused = await contract.paused();
+  console.log('isPaused', isPaused);
   const getNonceTx = await contract.connect(wallet).getNonce(from);
   const nonce = getNonceTx.toNumber();
   console.log('Next nonce', nonce);

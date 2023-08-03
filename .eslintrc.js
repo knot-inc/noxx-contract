@@ -16,6 +16,7 @@ module.exorts = {
     'no-console': 0,
     semi: 0,
     '@typescript-eslint/no-explicit-any': 0,
+    'no-unused-vars': 'warn',
   },
   settings: {
     'import/parsers': {

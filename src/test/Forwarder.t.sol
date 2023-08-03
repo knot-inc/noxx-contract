@@ -10,8 +10,8 @@ contract TextNoxx is INoxx {
   // No parameters required
   // https://forum.openzeppelin.com/t/unused-function-parameter-in-overriding-function-how-to-avoid-compiler-warning/20883
   function executeProofVerification(
-    uint256[8] calldata,
-    uint256[4] calldata,
+    bytes memory,
+    bytes32[] memory,
     address
   ) external pure returns (bool) {
     return true;
@@ -33,12 +33,13 @@ contract ForwarderTest is Test {
   address internal user;
   address internal spender;
 
-  uint256[8] internal proof = [0, 1, 2, 3, 4, 5, 6, 7];
-  uint256[4] internal input = [
-    20199178195905961735016964499017101892030965751975447305563774106156390243229,
-    8819208578747443403144689107172414148408385498253978002562079324362344755523,
-    3998228618412097657774020135623673392269184037010946178179137544382082909182,
-    18
+  string internal proofStr = vm.readLine('./circuit_v2/proofs/p.proof');
+  bytes internal proof = vm.parseBytes(proofStr);
+  bytes32[] internal input = [
+    bytes32(0x2ca8546807e6355a4a01dbce024fd82c0ff9fd50d426da6dfdd6faf17aa15b9d),
+    bytes32(0x137f7ec30b7b7a9d88649ae6d5f80ba2c974d5b80f2ea169efa95a44685ff143),
+    bytes32(0x08d6eacdd52aecdcc5f411ef9d456a330bbe8e47fc2b1a686216b16f1b1303fe),
+    bytes32(0x0000000000000000000000000000000000000000000000000000000000000012)
   ];
 
   function setUp() public {
