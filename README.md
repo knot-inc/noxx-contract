@@ -1,7 +1,7 @@
 # Preparation
 
 ```
-yarn install && yarn prepare
+pnpm install && pnpm prepare
 git submodule update --init --recursive
 ```
 

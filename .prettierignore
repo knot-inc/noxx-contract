@@ -10,9 +10,9 @@ abi
 broadcast
 cache
 
-# yarn
-.yarn/**/*
-.yarnrc.yml
+# pnpm
+.node_modules/**/*
+pnpm-lock.yaml
 
 # circom generated files
 circuit
