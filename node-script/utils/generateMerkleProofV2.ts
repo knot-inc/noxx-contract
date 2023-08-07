@@ -1,9 +1,9 @@
 import fs from 'fs';
-import { genZeroHashes } from './genZeroHashes';
-import { MERKLE_TREE_DEPTH } from '../config';
-import { buildPoseidon, encodeStringToBigInt } from '../zk-tools/lib';
+import { genZeroHashes } from './genZeroHashes.js';
+import { MERKLE_TREE_DEPTH } from '../config.js';
+import { buildPoseidon, encodeStringToBigInt } from '../zk-tools/lib/index.js';
 import { BigNumberish } from 'ethers';
-import { TreeNode } from '../types/node';
+import { TreeNode } from '../types/node.js';
 
 export const generateMerkleProof = async (
   path: string,
