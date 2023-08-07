@@ -31,7 +31,7 @@ export const verifyProofOnChain = async ({
     provider: provider.connection.url,
   });
 
-  // setup inputs
+  // setup inputs. Either directly call generateSolidityInputsV2 or read from file
   // const filepath = path.join('./node-script', 'input.txt');
   // const str = fs.readFileSync(filepath, 'utf-8');
   // const inputs = JSON.parse(str);
@@ -40,13 +40,14 @@ export const verifyProofOnChain = async ({
   const { proof, publicInputs } = await generateSolidityInputs();
   console.log('publicInputs', publicInputs.length);
   const contract = new ethers.Contract(verifierContract, verifierABI, wallet);
-  const result = await contract.connect(wallet).verify(proof, [
-    publicInputs,
-    // publicInputs.slice(0, 32),
-    // publicInputs.slice(32, 64),
-    // publicInputs.slice(64, 96),
-    // publicInputs.slice(96, 128),
-  ]);
+  const result = await contract
+    .connect(wallet)
+    .verify(proof, [
+      publicInputs.slice(0, 32),
+      publicInputs.slice(32, 64),
+      publicInputs.slice(64, 96),
+      publicInputs.slice(96, 128),
+    ]);
   console.log('result', result);
   return true;
 };

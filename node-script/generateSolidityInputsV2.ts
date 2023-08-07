@@ -159,12 +159,3 @@ export default async function main() {
 
   return { proof: slicedProof, publicInputs };
 }
-
-// main()
-//   .then(() => {
-//     process.exitCode = 0;
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//     process.exitCode = 1;
-//   });
