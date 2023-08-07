@@ -1,20 +1,22 @@
 import path from 'path';
 import fs from 'fs';
 import { ethers } from 'ethers';
-import { FormatTypes } from 'ethers/lib/utils';
+import { FormatTypes } from 'ethers/lib/utils.js';
 
 const genHumanReadableABI = async ({
+  contractFileName,
   contractName,
 }: {
+  contractFileName?: string;
   contractName?: string;
 }) => {
-  if (!contractName) {
+  if (!contractName || !contractFileName) {
     return 'No contractName set';
   }
 
   const filePath = path.join(
     './out',
-    `${contractName}.sol`,
+    `${contractFileName}.sol`,
     `${contractName}.json`,
   );
 
@@ -27,7 +29,7 @@ const genHumanReadableABI = async ({
   ) as string[];
   console.log({ humanReadableFormat });
 
-  const outPath = `./abi/${contractName}.json`;
+  const outPath = `./abi/${contractFileName}.json`;
   try {
     if (fs.existsSync(outPath)) {
       fs.rmSync(outPath);
@@ -52,7 +54,8 @@ const genHumanReadableABI = async ({
 console.log(`Generate Human readable abi from ${process.argv[2]}`);
 
 genHumanReadableABI({
-  contractName: process.argv[2],
+  contractFileName: process.argv[2],
+  contractName: process.argv[3],
 }).then(() => {
   console.log('Done');
 });

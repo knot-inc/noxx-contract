@@ -2,10 +2,10 @@ use dep::std;
 use dep::noir_merkleroot;
 
 fn main(
-    values: [Field; 3], // private inputs, in the order of name, age, countrycode
-    nonces: [Field; 3],
     commits: pub [Field; 3], // commitments, in the order of name, age, countrycode
     age: pub Field,
+    values: [Field; 3], // private inputs, in the order of name, age, countrycode
+    nonces: [Field; 3],
     leaf: Field, 
     root: Field, 
     path_indices: [Field; 8],
@@ -27,10 +27,10 @@ fn main(
 #[test]
 fn test_main() {
     main(
-        [5363620503418597221,20,19024], 
-        [825373492,825373492,825373492],
         [20199178195905961735016964499017101892030965751975447305563774106156390243229,8819208578747443403144689107172414148408385498253978002562079324362344755523,3998228618412097657774020135623673392269184037010946178179137544382082909182],
         18,
+        [5363620503418597221,20,19024], 
+        [825373492,825373492,825373492],
         13780856135824609486835123660791248959181113742546918549559321242116770234576,
         3507270469832926990571112645872386345557614009066375654691910206440851534809,
         [0,0,1,1,0,1,1,0],

@@ -85,7 +85,7 @@ async function verifyProof(
 }
 
 // Generate Solidity inputs for testing purpose
-async function main() {
+export default async function main() {
   console.log('Instantiating...');
 
   const api = await newBarretenbergApiAsync(4);
@@ -105,10 +105,10 @@ async function main() {
   console.log('Generating witness...');
 
   const witnessInputs = [
-    [name, age, country],
-    [nonce, nonce, nonce],
     commits,
     18n,
+    [name, age, country],
+    [nonce, nonce, nonce],
     merkleProof?.leaf,
     merkleProof?.root,
     merkleProof?.pathIndices,
@@ -146,22 +146,25 @@ async function main() {
     fs.unlinkSync(inputPath);
   }
   fs.openSync(inputPath, 'w');
-  // fs.writeFileSync(
-  //   inputPath,
-  //   JSON.stringify({
-  //     proof: hexProof,
-  //     input,
-  //   }),
-  // );
 
-  return;
+  const publicInputs = proof.slice(0, 32 * 4);
+  const slicedProof = proof.slice(32 * 4);
+  fs.writeFileSync(
+    inputPath,
+    JSON.stringify({
+      proof: Buffer.from(slicedProof).toString('hex'),
+      inputs: Buffer.from(publicInputs).toString('hex'),
+    }),
+  );
+
+  return { proof: slicedProof, publicInputs };
 }
 
-main()
-  .then(() => {
-    process.exitCode = 0;
-  })
-  .catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-  });
+// main()
+//   .then(() => {
+//     process.exitCode = 0;
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//     process.exitCode = 1;
+//   });
