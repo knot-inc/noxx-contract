@@ -134,7 +134,7 @@ $ nargo verify p
 Generates Solidity inputs. Result will be in `input.txt`
 
 ```
-$ TEST_TABLE_NAME={Table of MerkleTree}  yarn ts-node node-script/generateSolidityInputs.ts
+$ pnpm ts-node --esm node-script/verifyProof.ts
 ```
 
 # Updating submodule
