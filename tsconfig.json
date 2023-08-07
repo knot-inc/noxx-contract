@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
+    "module": "ESNext",
     "allowJs": true,
     "moduleResolution": "node",
     "declaration": true,
@@ -21,7 +21,7 @@
     "sourceMap": true,
     "outDir": "./dist/tsc/",
     "types": ["node"],
-    "lib": ["ES6", "DOM"],
+    "lib": ["ES6", "DOM", "ES2020"],
     "typeRoots": ["node_modules/@types", "node-script/types"]
   },
   "include": ["**/*.ts"],

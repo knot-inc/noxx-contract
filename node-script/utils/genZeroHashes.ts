@@ -1,5 +1,5 @@
-import { MERKLE_TREE_DEPTH } from '../config';
-import { createPoseidonHash } from '../zk-tools/lib';
+import { MERKLE_TREE_DEPTH } from '../config.js';
+import { createPoseidonHash } from '../zk-tools/lib/index.js';
 
 export const genZeroHashes = (poseidon: any) => {
   let zeroHash = 0n;

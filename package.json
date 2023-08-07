@@ -3,6 +3,7 @@
   "author": "tomo",
   "packageManager": "pnpm@8.6.7",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "prepare": "pnpm husky install",
     "lint": "prettier --check .",
@@ -26,10 +27,14 @@
     "@aws-sdk/client-dynamodb": "^3.145.0",
     "@aws-sdk/credential-providers": "^3.145.0",
     "@aws-sdk/lib-dynamodb": "^3.145.0",
+    "@aztec/bb.js": "^0.3.4",
+    "@noir-lang/acvm_js": "github:noir-lang/acvm-simulator-wasm#c56eec56f67f90fef90126c5575b85190bdcd1e1",
+    "@noir-lang/noir_wasm": "github:noir-lang/noir_wasm",
     "circomlib": "^2.0.5",
     "circomlibjs": "^0.1.7",
     "dotenv": "^16.0.1",
     "ethers": "^5.6.9",
+    "fflate": "^0.8.0",
     "js-logger": "^1.6.1",
     "snarkjs": "^0.7.0"
   }

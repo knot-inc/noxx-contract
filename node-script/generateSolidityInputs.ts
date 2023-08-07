@@ -8,7 +8,9 @@ import {
   generateGroth16Proof,
   packToSolidityProof,
 } from './zk-tools/lib';
-import { generateMerkleProof } from './utils/generateMerkleProof';
+import { generateMerkleProof } from './utils/generateMerkleProofV2';
+
+const filepath = path.join('./node-script', 'tree.json');
 
 // Generate Solidity inputs for testing purpose
 async function main() {
@@ -21,7 +23,7 @@ async function main() {
   const commits = [name, age, country].map((v) =>
     createPoseidonHash(poseidon, [v, nonce]).toString(),
   );
-  const merkleProof = await generateMerkleProof('BR');
+  const merkleProof = await generateMerkleProof(filepath, 'BR');
   const witness = {
     values: [name, age, country].map((v) => v.toString()),
     nonces: [nonce.toString(), nonce.toString(), nonce.toString()],
