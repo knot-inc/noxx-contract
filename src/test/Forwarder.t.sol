@@ -33,7 +33,7 @@ contract ForwarderTest is Test {
   address internal user;
   address internal spender;
 
-  string internal proofStr = vm.readLine('./circuit_v2/proofs/p.proof');
+  string internal proofStr = vm.readLine('./circuit_v2/proofs/main.proof');
   bytes internal proof = vm.parseBytes(proofStr);
   bytes32[] internal input = [
     bytes32(0x2ca8546807e6355a4a01dbce024fd82c0ff9fd50d426da6dfdd6faf17aa15b9d),

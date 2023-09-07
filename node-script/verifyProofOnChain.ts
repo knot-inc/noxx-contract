@@ -1,15 +1,18 @@
 import 'dotenv/config';
-// import fs from 'fs';
+import fs from 'fs';
 // import path from 'path';
 import generateSolidityInputs from './generateSolidityInputsV2.js';
 import { ethers, providers, Wallet } from 'ethers';
-import verifierABI from '../abi/TalentVerifierV2.json' assert { type: 'json' };
 
 const alchemyApiKey = process.env.ALCHEMY_KEY;
 // Wallet key is the one who signs thus it should be the `from` account
 const walletKey = process.env.SIGNER_WALLET_KEY as string;
 
 const env = process.env.ENV || 'local';
+
+const verifierABI = JSON.parse(
+  fs.readFileSync('./out/TalentVerifierV2.sol/UltraVerifier.json', 'utf8'),
+).abi;
 
 export const verifyProofOnChain = async ({
   verifierContract,

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import 'forge-std/Test.sol';
-import '../TalentVerifierV2.sol';
+import '../../circuit_v2/contract/main/plonk_vk.sol';
 
 contract TalentVerifierTestV2 is Test {
   UltraVerifier public verifier;
@@ -15,7 +15,7 @@ contract TalentVerifierTestV2 is Test {
   }
 
   function testVerifyProof() public view {
-    string memory proof = vm.readLine('./circuit_v2/proofs/p.proof');
+    string memory proof = vm.readLine('./circuit_v2/proofs/main.proof');
     bytes memory proofBytes = vm.parseBytes(proof);
     bytes32[] memory publicInputs = new bytes32[](4);
     publicInputs[0] = bytes32(
@@ -38,7 +38,7 @@ contract TalentVerifierTestV2 is Test {
 
   function test_WrongProof() public {
     vm.expectRevert();
-    string memory proof = vm.readLine('./circuit_v2/proofs/p.proof');
+    string memory proof = vm.readLine('./circuit_v2/proofs/main.proof');
     bytes memory proofBytes = vm.parseBytes(proof);
     bytes32[] memory publicInputs = new bytes32[](4);
     publicInputs[0] = bytes32(
