@@ -33,7 +33,7 @@ $ forge script script/FakeNFT.s.sol:FakeNFTScript --rpc-url $RPC_URL --private-k
 | Contract        | Address                                    |
 | --------------- | ------------------------------------------ |
 | FakeNFT         | 0x51a1B628d9a2CFb76306FDccb39E56382A64482B |
-| TalentVerifier  | 0x479f7d70693a8d12db15f8415beb724ef223870f |
+| TalentVerifier  | 0xb52b844F9c9481Bcb8CdDb44e6E8322267627fb6 |
 | VerifyForwarder | 0x8bb9c7c130aec8947a72ae5cd0d361b285a7b8c1 |
 | NoxxABT         | 0xc8984bcf50fe9a864b5184bb83cfd968805067b7 |
 | Noxx            | 0x264b66f5113892AAEA263df76A140dF67c0f7554 |
@@ -58,7 +58,7 @@ $ forge script --rpc-url $M_RPC_URL --verify --use solc:0.8.13 --private-key $M_
 ### For mumbai test net(80001)
 
 ```
-$ forge verify-check --chain 80001 {GUID} --etherscan-key $SCAN_API_KEY
+$ forge verify-check --chain 80001 --verifier sourcify --etherscan-api-key $SCAN_API_KEY {GUID}
 ```
 
 ### For mainnet(137)
