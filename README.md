@@ -58,12 +58,14 @@ $ forge script --rpc-url $M_RPC_URL --verify --use solc:0.8.13 --private-key $M_
 ### For mumbai test net(80001)
 
 ```
+$ forge verify-contract {GUID} {Contract} --chain 80001 --verifier sourcify
 $ forge verify-check --chain 80001 --verifier sourcify --etherscan-api-key $SCAN_API_KEY {GUID}
 ```
 
 ### For mainnet(137)
 
 ```
+$ forge verify-contract {GUID} {Contract} --chain 137 --verifier sourcify
 $ forge verify-check --chain 137 {GUID} --etherscan-key $M_SCAN_API_KEY
 ```
 
