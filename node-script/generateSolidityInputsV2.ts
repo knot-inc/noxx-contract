@@ -8,12 +8,8 @@ import {
   encodeStringToBigInt,
 } from './zk-tools/lib/index.js';
 import { generateMerkleProof } from './utils/generateMerkleProofV2.js';
-import {
-  BarretenbergApiAsync,
-  Crs,
-  newBarretenbergApiAsync,
-  RawBuffer,
-} from '@aztec/bb.js/dest/node/index.js';
+// @ts-ignore
+import { Barretenberg, Crs, RawBuffer } from '@aztec/bb.js';
 import { decompressSync } from 'fflate';
 import circuit from '../circuit_v2/target/main.json' assert { type: 'json' };
 import { executeCircuit, compressWitness } from '@noir-lang/acvm_js';
@@ -35,7 +31,7 @@ async function generateWitness(
 }
 
 async function generateProof(
-  api: BarretenbergApiAsync,
+  api: Barretenberg,
   acirBuffer: Buffer,
   witness: Uint8Array,
 ) {
@@ -62,7 +58,7 @@ async function generateProof(
 }
 
 async function verifyProof(
-  api: BarretenbergApiAsync,
+  api: Barretenberg,
   acirBuffer: Buffer,
   proof: Uint8Array,
 ) {
@@ -88,7 +84,7 @@ async function verifyProof(
 export default async function main() {
   console.log('Instantiating...');
 
-  const api = await newBarretenbergApiAsync(4);
+  const api = await Barretenberg.new(4);
   const acirBuffer = Buffer.from(circuit.bytecode, 'base64');
 
   console.log('Generating inputs...');
@@ -135,7 +131,6 @@ export default async function main() {
 
   const proof = await generateProof(api, acirBuffer, witness);
 
-  console.log('proof', proof);
   console.log('Verify proof...');
   const verified = await verifyProof(api, acirBuffer, proof);
   console.log('Verified:', verified);

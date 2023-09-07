@@ -11,7 +11,7 @@ const walletKey = process.env.SIGNER_WALLET_KEY as string;
 const env = process.env.ENV || 'local';
 
 const verifierABI = JSON.parse(
-  fs.readFileSync('./out/TalentVerifierV2.sol/UltraVerifier.json', 'utf8'),
+  fs.readFileSync('./out/plonk_vk.sol/UltraVerifier.json', 'utf8'),
 ).abi;
 
 export const verifyProofOnChain = async ({
