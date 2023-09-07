@@ -8,12 +8,8 @@ import {
   encodeStringToBigInt,
 } from './zk-tools/lib/index.js';
 import { generateMerkleProof } from './utils/generateMerkleProofV2.js';
-import {
-  BarretenbergApiAsync,
-  Crs,
-  newBarretenbergApiAsync,
-  RawBuffer,
-} from '@aztec/bb.js/dest/node/index.js';
+// @ts-ignore
+import { Barretenberg, Crs, RawBuffer } from '@aztec/bb.js';
 import { decompressSync } from 'fflate';
 import circuit from '../circuit_v2/target/main.json' assert { type: 'json' };
 import { executeCircuit, compressWitness } from '@noir-lang/acvm_js';
@@ -35,7 +31,7 @@ async function generateWitness(
 }
 
 async function generateProof(
-  api: BarretenbergApiAsync,
+  api: Barretenberg,
   acirBuffer: Buffer,
   witness: Uint8Array,
 ) {
@@ -62,7 +58,7 @@ async function generateProof(
 }
 
 async function verifyProof(
-  api: BarretenbergApiAsync,
+  api: Barretenberg,
   acirBuffer: Buffer,
   proof: Uint8Array,
 ) {
@@ -85,10 +81,10 @@ async function verifyProof(
 }
 
 // Generate Solidity inputs for testing purpose
-async function main() {
+export default async function main() {
   console.log('Instantiating...');
 
-  const api = await newBarretenbergApiAsync(4);
+  const api = await Barretenberg.new(4);
   const acirBuffer = Buffer.from(circuit.bytecode, 'base64');
 
   console.log('Generating inputs...');
@@ -105,10 +101,10 @@ async function main() {
   console.log('Generating witness...');
 
   const witnessInputs = [
-    [name, age, country],
-    [nonce, nonce, nonce],
     commits,
     18n,
+    [name, age, country],
+    [nonce, nonce, nonce],
     merkleProof?.leaf,
     merkleProof?.root,
     merkleProof?.pathIndices,
@@ -135,7 +131,6 @@ async function main() {
 
   const proof = await generateProof(api, acirBuffer, witness);
 
-  console.log('proof', proof);
   console.log('Verify proof...');
   const verified = await verifyProof(api, acirBuffer, proof);
   console.log('Verified:', verified);
@@ -146,22 +141,16 @@ async function main() {
     fs.unlinkSync(inputPath);
   }
   fs.openSync(inputPath, 'w');
-  // fs.writeFileSync(
-  //   inputPath,
-  //   JSON.stringify({
-  //     proof: hexProof,
-  //     input,
-  //   }),
-  // );
 
-  return;
+  const publicInputs = proof.slice(0, 32 * 4);
+  const slicedProof = proof.slice(32 * 4);
+  fs.writeFileSync(
+    inputPath,
+    JSON.stringify({
+      proof: Buffer.from(slicedProof).toString('hex'),
+      inputs: Buffer.from(publicInputs).toString('hex'),
+    }),
+  );
+
+  return { proof: slicedProof, publicInputs };
 }
-
-main()
-  .then(() => {
-    process.exitCode = 0;
-  })
-  .catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-  });

@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import 'forge-std/Script.sol';
 import 'forge-std/console2.sol';
 import '../src/Noxx.sol';
-import '../src/TalentVerifierV2.sol';
+import '../circuit_v2/contract/main/plonk_vk.sol';
 import '../src/NoxxABT.sol';
 import '../src/interfaces/INoxxABT.sol';
 import '../src/interfaces/IUltraVerifier.sol';

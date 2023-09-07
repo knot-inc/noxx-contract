@@ -118,15 +118,15 @@ cp plonk_vk.sol src/TalentVerifierV2.sol
 Prepare Prover.toml
 
 ```
-$ nargo prove p
+$ nargo prove
 ```
 
-This will generate `proofs/p.proof`
+This will generate `proofs/main.proof`
 
 ### 3. Verify the proof
 
 ```
-$ nargo verify p
+$ nargo verify
 ```
 
 ### Appendix. Generate proof for Solidity
@@ -134,7 +134,7 @@ $ nargo verify p
 Generates Solidity inputs. Result will be in `input.txt`
 
 ```
-$ TEST_TABLE_NAME={Table of MerkleTree}  yarn ts-node node-script/generateSolidityInputs.ts
+$ pnpm ts-node --esm node-script/verifyProof.ts
 ```
 
 # Updating submodule

@@ -15,14 +15,11 @@ dependencies:
     specifier: ^3.145.0
     version: 3.145.0(@aws-sdk/client-dynamodb@3.145.0)(@aws-sdk/smithy-client@3.374.0)(@aws-sdk/types@3.378.0)
   '@aztec/bb.js':
-    specifier: ^0.3.4
-    version: 0.3.4
+    specifier: 0.5.1
+    version: 0.5.1
   '@noir-lang/acvm_js':
-    specifier: github:noir-lang/acvm-simulator-wasm#c56eec56f67f90fef90126c5575b85190bdcd1e1
-    version: github.com/noir-lang/acvm-simulator-wasm/c56eec56f67f90fef90126c5575b85190bdcd1e1
-  '@noir-lang/noir_wasm':
-    specifier: github:noir-lang/noir_wasm
-    version: github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6(@noir-lang/noir-source-resolver@1.1.2)
+    specifier: git+https://github.com/noir-lang/acvm-simulator-wasm.git#b9d9ca9dfc5140839f23998d9466307215607c42
+    version: github.com/noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42
   circomlib:
     specifier: ^2.0.5
     version: 2.0.5
@@ -868,14 +865,14 @@ packages:
       tslib: 2.6.1
     dev: false
 
-  /@aztec/bb.js@0.3.4:
-    resolution: {integrity: sha512-h6Od6UrtHa4Bz8QqCzHGn1VYco1P6K12yaFWDeF8PKFvuJwilVlBEffMWGGNUlaTeZtx46QYoXxUMZ2862/m4g==}
+  /@aztec/bb.js@0.5.1:
+    resolution: {integrity: sha512-6464VrHgztws/rejJG0b3RUbycQ6subNoYODtuz7yDSZ9/s32ikjYOYADcAqSdK3QsohCifIvmkyis+KOpyJYQ==}
     hasBin: true
     dependencies:
       comlink: 4.4.1
       commander: 10.0.1
       debug: 4.3.4
-      idb-keyval: 6.2.1
+      tslib: 2.6.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1861,10 +1858,6 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
-
-  /@noir-lang/noir-source-resolver@1.1.2:
-    resolution: {integrity: sha512-GRiAR7z2RxdUt07fL3X303sm3Qs4Ec9lPDCQ5uwK7xDD2nK6KaNBNQyl+JrotCxsMhoh7MVh38SZSOOCxaJgUQ==}
-    dev: false
 
   /@sinclair/typebox@0.24.51:
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
@@ -3317,10 +3310,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dev: true
-
-  /idb-keyval@6.2.1:
-    resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
-    dev: false
 
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
@@ -5080,19 +5069,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/noir-lang/acvm-simulator-wasm/c56eec56f67f90fef90126c5575b85190bdcd1e1:
-    resolution: {commit: c56eec56f67f90fef90126c5575b85190bdcd1e1, repo: git+ssh://git@github.com/noir-lang/acvm-simulator-wasm.git, type: git}
+  github.com/noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42:
+    resolution: {commit: b9d9ca9dfc5140839f23998d9466307215607c42, repo: git+ssh://git@github.com/noir-lang/acvm-simulator-wasm.git, type: git}
     name: '@noir-lang/acvm_js'
-    version: 0.0.0-3cc4575
-    dev: false
-
-  github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6(@noir-lang/noir-source-resolver@1.1.2):
-    resolution: {tarball: https://codeload.github.com/noir-lang/noir_wasm/tar.gz/be1ada9a86b1042b2058b929f8b04ea643c047c6}
-    id: github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6
-    name: '@noir-lang/noir_wasm'
-    version: 0.9.1-0164a92.0
-    peerDependencies:
-      '@noir-lang/noir-source-resolver': 1.1.2
-    dependencies:
-      '@noir-lang/noir-source-resolver': 1.1.2
+    version: 0.0.0-d576736
     dev: false

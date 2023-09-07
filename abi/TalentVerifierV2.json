@@ -1,0 +1,10 @@
+[
+"error EC_SCALAR_MUL_FAILURE()",
+"error MOD_EXP_FAILURE()",
+"error PROOF_FAILURE()",
+"error PUBLIC_INPUT_COUNT_INVALID(uint256 expected, uint256 actual)",
+"error PUBLIC_INPUT_GE_P()",
+"error PUBLIC_INPUT_INVALID_BN128_G1_POINT()",
+"function getVerificationKeyHash() pure returns (bytes32)",
+"function verify(bytes _proof, bytes32[] _publicInputs) view returns (bool)"
+]

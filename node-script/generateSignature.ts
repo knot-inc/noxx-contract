@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { ethers, providers, Wallet } from 'ethers';
-import forwarderABI from '../abi/Forwarder.json';
+import forwarderABI from '../abi/Forwarder.json' assert { type: 'json' };
 
 const alchemyApiKey = process.env.ALCHEMY_KEY;
 // Wallet key is the one who signs thus it should be the `from` account
@@ -20,7 +20,7 @@ export const genSignature = async ({
   console.log('env', env);
   let provider =
     env === 'local'
-      ? new providers.JsonRpcProvider('http://localhost:8545')
+      ? new providers.JsonRpcProvider('http://127.0.0.1:8545')
       : new providers.AlchemyProvider('maticmum', alchemyApiKey);
   const wallet = new Wallet(
     env === 'local'

@@ -8,10 +8,10 @@ import '../Noxx.sol';
 
 contract TestVerifier is IUltraVerifier {
   function verify(
-    bytes memory,
-    bytes32[] memory publicInputs
+    bytes calldata _proof,
+    bytes32[] memory _publicInputs
   ) external pure returns (bool) {
-    return (publicInputs[3] ==
+    return (_publicInputs[3] ==
       bytes32(
         0x0000000000000000000000000000000000000000000000000000000000000012
       ));
@@ -52,7 +52,7 @@ contract NoxxTest is Test {
 
   address internal from;
 
-  string internal proofStr = vm.readLine('./circuit_v2/proofs/p.proof');
+  string internal proofStr = vm.readLine('./circuit_v2/proofs/main.proof');
   bytes internal proof = vm.parseBytes(proofStr);
   bytes32[] internal input = [
     bytes32(0x2ca8546807e6355a4a01dbce024fd82c0ff9fd50d426da6dfdd6faf17aa15b9d),

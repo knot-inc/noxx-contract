@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import 'forge-std/Script.sol';
-import '../src/TalentVerifierV2.sol';
+import '../circuit_v2/contract/main/plonk_vk.sol';
 
 contract TalentVerifierScript is Script {
   function setUp() public {}

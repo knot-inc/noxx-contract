@@ -6,7 +6,7 @@ pragma solidity ^0.8.13;
 interface IUltraVerifier {
   // @dev Verifies a proof with UltraVerifier
   function verify(
-    bytes memory proof,
-    bytes32[] memory publicInputs
+    bytes calldata _proof,
+    bytes32[] calldata _publicInputs
   ) external view returns (bool);
 }
